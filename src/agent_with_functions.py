@@ -348,7 +348,6 @@ def main():
                                     formatted_text
                                 )
 
-
                                 handled_output = True
 
 
