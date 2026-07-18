@@ -1,7 +1,21 @@
+# Environment variables (Azure credentials/configuration)
 .env
+
+# Python cache files
 __pycache__/
 *.pyc
+*.pyo
 
+# Virtual environments
+venv/
+labenv/
+
+# Generated AI agent files
 agent_outputs/
 
+# VS Code settings
 .vscode/
+
+# Operating system files
+.DS_Store
+Thumbs.db
