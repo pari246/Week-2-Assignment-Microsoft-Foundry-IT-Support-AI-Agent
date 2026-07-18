@@ -160,3 +160,222 @@ def format_output_text(content_item, openai_client, downloaded_files):
 
 
     return text, referenced_files
+
+def main():
+
+    load_dotenv()
+
+    project_endpoint = os.environ.get("PROJECT_ENDPOINT")
+
+    agent_name = os.environ.get(
+        "AGENT_NAME",
+        "it-support-agent"
+    )
+
+
+    if not project_endpoint:
+
+        print(
+            "Error: PROJECT_ENDPOINT environment variable not set"
+        )
+
+        print(
+            "Please add it to your .env file"
+        )
+
+        return
+
+
+    print(
+        "Connecting to Microsoft Foundry project..."
+    )
+
+
+    credential = DefaultAzureCredential()
+
+
+    project_client = AIProjectClient(
+        credential=credential,
+        endpoint=project_endpoint
+    )
+
+
+    openai_client = project_client.get_openai_client()
+
+
+    print(
+        f"Loading agent: {agent_name}"
+    )
+
+
+    agent = project_client.agents.get(
+        agent_name=agent_name
+    )
+
+
+    print(
+        f"Connected to agent: {agent.name}"
+    )
+
+
+    conversation = openai_client.conversations.create(
+        items=[]
+    )
+
+
+    print(
+        f"Conversation created: {conversation.id}"
+    )
+
+
+    print("\n" + "=" * 60)
+
+    print(
+        "IT Support Agent Ready!"
+    )
+
+    print(
+        "Ask questions, request analysis, or get help."
+    )
+
+    print(
+        "Type 'exit' to quit."
+    )
+
+    print("=" * 60)
+
+
+    while True:
+
+        user_input = input(
+            "\nYou: "
+        ).strip()
+
+
+        if user_input.lower() in [
+            "exit",
+            "quit",
+            "bye"
+        ]:
+
+            print(
+                "Goodbye!"
+            )
+
+            break
+
+
+        if not user_input:
+
+            continue
+
+
+        openai_client.conversations.items.create(
+
+            conversation_id=conversation.id,
+
+            items=[
+                {
+                    "type": "message",
+                    "role": "user",
+                    "content": user_input
+                }
+            ]
+        )
+
+
+        print(
+            "\n[Agent is thinking...]"
+        )
+
+
+        response = openai_client.responses.create(
+
+            conversation=conversation.id,
+
+            extra_body={
+                "agent_reference": {
+                    "name": agent.name,
+                    "type": "agent_reference"
+                }
+            },
+
+            input=""
+        )
+
+
+        handled_output = False
+
+        downloaded_files = {}
+
+        referenced_files = set()
+
+
+        if hasattr(response, "output"):
+
+            for item in response.output:
+
+
+                if getattr(item, "type", "") == "message":
+
+                    if getattr(item, "content", None):
+
+                        for content_item in item.content:
+
+
+                            if getattr(
+                                content_item,
+                                "type",
+                                ""
+                            ) == "output_text":
+
+
+                                formatted_text, files = format_output_text(
+
+                                    content_item,
+
+                                    openai_client,
+
+                                    downloaded_files
+                                )
+
+
+                                referenced_files.update(files)
+
+
+                                print(
+                                    "\nAgent:",
+                                    formatted_text
+                                )
+
+
+                                handled_output = True
+
+
+
+                elif getattr(item, "type", "") == "image":
+
+                    print(
+                        "\nAgent generated an image."
+                    )
+
+                    handled_output = True
+
+
+
+        if not handled_output:
+
+            if hasattr(
+                response,
+                "output_text"
+            ):
+
+                print(
+                    "\nAgent:",
+                    response.output_text
+                )
+
+
+if __name__ == "__main__":
+
+    main()
