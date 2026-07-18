@@ -1,1 +1,87 @@
+Contoso Corporation IT Policy
 
+=================================
+Password Reset Policy
+=================================
+
+Employees who forget their password must request a password reset through the IT support portal.
+
+Before resetting a password, employees must verify their identity using approved verification methods.
+
+Employees should never share passwords with other users or IT staff.
+
+Password requirements:
+
+- Passwords must be changed when requested by security policy.
+- Passwords must contain a combination of letters, numbers, and special characters.
+- Employees should avoid reusing previous passwords.
+
+
+=================================
+Software Installation Policy
+=================================
+
+Employees who need new software must submit a software installation request through the IT service portal.
+
+Software requests must include:
+
+- Employee name
+- Department
+- Business justification
+- Software name and version required
+
+The IT team reviews requests to ensure software is approved and meets company security requirements.
+
+Employees should not install unauthorized software on company devices.
+
+
+=================================
+Hardware Troubleshooting Policy
+=================================
+
+Employees experiencing hardware problems should first perform basic troubleshooting:
+
+- Restart the device
+- Check cable connections
+- Verify network connectivity
+- Check for system updates
+
+If the problem continues, employees should create an IT support ticket.
+
+The ticket should include:
+
+- Device type
+- Asset ID
+- Description of the issue
+- Error messages
+- Steps already attempted
+
+
+=================================
+Lost or Stolen Device Policy
+=================================
+
+Employees must immediately report lost or stolen company devices to the IT department.
+
+The employee should provide:
+
+- Device type
+- Device asset ID
+- Location where it was lost
+- Time of incident
+
+IT may remotely secure the device to protect company information.
+
+
+=================================
+IT Support Contact Policy
+=================================
+
+Employees should contact IT support for:
+
+- Account access problems
+- Hardware failures
+- Software issues
+- Security concerns
+
+When submitting a ticket, employees should provide complete information to help IT resolve issues quickly.
