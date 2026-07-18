@@ -1,0 +1,10 @@
+Contoso IT Policy
+
+Password Reset Policy:
+Employees must verify their identity before resetting passwords.
+
+Software Installation Policy:
+Employees must submit software requests through the IT portal.
+
+Hardware Support:
+Employees should contact IT support for hardware issues.
