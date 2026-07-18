@@ -1,4 +1,4 @@
-# Microsoft Foundry IT Support AI Agent
+# ms-foundry-it-support-agent
 
 ## Project Description
 
